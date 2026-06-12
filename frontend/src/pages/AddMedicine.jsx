@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const BACKEND_URL = "https://mediclear-assessment-backend.vercel.app";
+
 function AddMedicine() {
   const navigate = useNavigate();
 
@@ -14,6 +16,7 @@ function AddMedicine() {
   });
 
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -22,15 +25,39 @@ function AddMedicine() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setMessage("");
 
-    localStorage.setItem("mediclear_plan", JSON.stringify(formData));
-    setMessage("Medicine plan saved successfully.");
+    try {
+      const response = await fetch(`${BACKEND_URL}/medicine-plans`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
 
-    setTimeout(() => {
-      navigate("/todays-plan");
-    }, 700);
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Something went wrong");
+      }
+
+      localStorage.setItem("mediclear_plan", JSON.stringify(formData));
+      setMessage("Medicine plan saved successfully.");
+
+      setTimeout(() => {
+        navigate("/todays-plan");
+      }, 700);
+
+    } catch (error) {
+      setMessage("Error saving medicine plan. Please try again.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -95,7 +122,9 @@ function AddMedicine() {
           placeholder="Extra instructions"
         />
 
-        <button type="submit">Save Medicine Plan</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Saving..." : "Save Medicine Plan"}
+        </button>
       </form>
 
       {message && <p className="success-text">{message}</p>}
