@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #e8f6f3;
+  color: #1f2937;
+}
+
+.app-bg {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 16px;
+}
+
+.phone-card {
+  width: 100%;
+  max-width: 430px;
+  min-height: 780px;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.center-page {
+  min-height: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  color: #0f766e;
+  font-size: 36px;
+  line-height: 1.1;
+  margin: 0 0 12px;
+  text-align: center;
+}
+
+h2 {
+  color: #134e4a;
+  margin-top: 0;
+}
+
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.info-box {
+  background: #f0fdfa;
+  border: 1px solid #ccfbf1;
+  border-radius: 18px;
+  padding: 18px;
+  margin: 18px 0;
+  line-height: 1.6;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+button {
+  margin-top: 16px;
+  width: 100%;
+  padding: 15px;
+  background: #0f766e;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #ccfbf1;
+  color: #0f766e;
+}
+
+.success-text {
+  color: #0f766e;
+  text-align: center;
+  font-weight: 700;
+}
